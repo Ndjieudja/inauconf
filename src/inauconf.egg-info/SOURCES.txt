@@ -1,0 +1,10 @@
+LICENCE
+README.md
+pyproject.toml
+src/inauconf/__init__.py
+src/inauconf/shuffle.py
+src/inauconf.egg-info/PKG-INFO
+src/inauconf.egg-info/SOURCES.txt
+src/inauconf.egg-info/dependency_links.txt
+src/inauconf.egg-info/top_level.txt
+tests/test.py

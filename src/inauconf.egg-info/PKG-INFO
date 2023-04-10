@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: inauconf
+Version: 1.1
+Summary: A simple script to code type text input
+Author-email: Ndjieudja'dja Gabriel <gabrielndjieudja@gmail.com>
+Project-URL: Homepage, https://github.com/ndjieudja/inauconf
+Project-URL: Bug Tracker, https://github.com/ndjieudja/inauconf/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENCE
+
+# Example Package
+
+This is a simple example package. You can use
+[Github-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
+to write your content.

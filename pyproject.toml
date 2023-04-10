@@ -1,0 +1,18 @@
+[project]
+name = "inauconf"
+version = "1.1"
+authors = [
+  { name="Ndjieudja'dja Gabriel", email="gabrielndjieudja@gmail.com" },
+]
+description = "A simple script to code type text input"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ndjieudja/inauconf"
+"Bug Tracker" = "https://github.com/ndjieudja/inauconf/issues"

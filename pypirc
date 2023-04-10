@@ -1,0 +1,13 @@
+[distutils]
+  index-servers =
+    pypi
+    PROJECT_NAME
+
+[pypi]
+  username = __token__
+  password = # un jeton valide pour tous vos projets, ou pour un projet en particulier que vous souhaitez définir comme valeur par défaut
+
+[PROJECT_NAME]
+  repository = https://upload.pypi.org/legacy/
+  username = __token__
+  password = # un jeton de projet 
