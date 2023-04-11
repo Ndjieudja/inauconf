@@ -5,9 +5,9 @@
 
 [pypi]
   username = __token__
-  password = # un jeton valide pour tous vos projets, ou pour un projet en particulier que vous souhaitez définir comme valeur par défaut
+  password = pypi-AgEIcHlwaS5vcmcCJDMzNzFjYWIwLTkyMDctNGU2YS1iOGM0LWJjNzliOGRkYmRiMgACEFsxLFsiaW5hdWNvbmYiXV0AAixbMixbIjk2NDBhNzg2LTYyZTMtNDAzNS04Zjk4LTJlMzY5ZTgyZmQ3YSJdXQAABiB7K2Gx14T5kwSkbDk1GP7Kq0wIpFUh4Nr_2U8hlFk3EA
 
 [PROJECT_NAME]
   repository = https://upload.pypi.org/legacy/
   username = __token__
-  password = # un jeton de projet 
+  password = pypi-AgEIcHlwaS5vcmcCJDMzNzFjYWIwLTkyMDctNGU2YS1iOGM0LWJjNzliOGRkYmRiMgACEFsxLFsiaW5hdWNvbmYiXV0AAixbMixbIjk2NDBhNzg2LTYyZTMtNDAzNS04Zjk4LTJlMzY5ZTgyZmQ3YSJdXQAABiB7K2Gx14T5kwSkbDk1GP7Kq0wIpFUh4Nr_2U8hlFk3EA
