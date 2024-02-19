@@ -1,0 +1,7 @@
+setup.py
+inauconf_1.2.1.egg-info/PKG-INFO
+inauconf_1.2.1.egg-info/SOURCES.txt
+inauconf_1.2.1.egg-info/dependency_links.txt
+inauconf_1.2.1.egg-info/entry_points.txt
+inauconf_1.2.1.egg-info/requires.txt
+inauconf_1.2.1.egg-info/top_level.txt
