@@ -1,60 +1,61 @@
+# Inauconf
 
-                                                                                                                        22.01.22
-                                                                
+
+Inauconf is the script to hidden real Text 
+Ce projet est une application Python qui effectue diverses opérations. Il est écrit en utilisant le langage de programmation Python.
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
 pip install inauconf
+```
 
-Author: NDJIEU'DJA Gabriel
-Develloper en Python 3.5
-Version: 1.1
+## Fonctionnalités
 
+- **Cryptage et décryptage** : L'application permet de crypter et de décrypter des chaînes de caractères ou des fichiers en utilisant un algorithme personnalisé.
+- **Manipulation de fichiers** : Vous pouvez également utiliser l'application pour chiffrer ou déchiffrer des fichiers.
+- **Hashage de fichiers** : L'application calcule également la valeur de hachage SHA-256 d'un fichier.
 
-REsumer:
-    Inauconf est une application de criptage de donner de type string sur la base utf8. L'application a pour finiter plusieur utiliter:
-        - cripter les mot de passe 
-        - cripter les documents de type string 
-        - lecture de document cripter par la memem application
-        - dans le volet de mote de passe des eventuealiter d'insertion de ses dernier directimeent dans la base de donner. pour cel volet en 
-    exeption en date d'aujourd'hui on ne parlera que la base de donnne Postgres dans sa verion 13.
+## Comment utiliser l'application
 
+Voici comment utiliser l'application :
 
-Presentation:
+1. Assurez-vous d'avoir Python installé sur votre système.
+2. Clonez ce dépôt Git : `git clone https://github.com/ndjieudja/inauconf.git`
+3. Accédez au répertoire du projet : `cd mon-projet-python`
+4. Installez les dépendances : `pip install -r requirements.txt`
+5. Exécutez l'application : 
+    ```python
+    from inauconf.crypt import EncryptAll
 
->>from inauconf import shuffle
+    # crypt function
+    EncryptAll.encrypt('inauconf')
+    # output: ˫105ɒ110/97Ƞ117W99Ǻ111Ʀ110˯102 .... sample
 
-* le modeule Shuffle.py :
-    ce dernier contient essenetiellement l'agorithme de chiffrement et de dechiffrement. Il contient la classe 
-        - EncripAll() 
-    donc les deux fonction principale comme mentionnner plus haut sont les chiffrement 
-            * cript(target)
-                target ici designe la cibre a cript cela part etre tout type de docuement en format string
-            * uncript(target)
-                target ici designe toujours la cible de dechiffre dans ce cas exeptionnellement la cible dois
-                etre un document chiffrer par la meme application 
+    # uncrypt function
+    EncryptAll.decrypt('Ŷ105ǝ110a97ʙ11799à111̶110ƻ102')
+    # output: inauconf
 
+    # crypt & bloc file
+    EncryptAll.crypt_file('inauconf.txt')
+6. Suivez les instructions à l'écran pour utiliser les différentes fonctionnalités de l'application.
 
-* le module INC_REader.py:
-    celui ci contient l'utilitaire de gestion graphique qui quant a lui est designe par l'applicaiton standar de lecture de documemnt 
-    chiffre ou decriffre par l Inauconf qui possedera l'extension "*.inc"
-    en effet l GUI est cree sur la base de l'utilitarie tkinter syste de gestion graphique.
+**Note importante** : Lorsque vous utilisez la fonctionnalité de chiffrement ou de déchiffrement de fichiers, assurez-vous que le fichier source et le fichier chiffré/déchiffré portent le même nom, à l'exception de l'extension de fichier. Par exemple, si vous avez un fichier `mon_fichier.txt` que vous souhaitez chiffrer, le fichier chiffré sera `mon_fichier.inc`. Veillez à ne pas séparer les deux fichiers pour garantir le bon fonctionnement de l'application.
 
-* le module main:
-    Mian designe le programme principale de l'applicaition qui reunira tout les differents citer et possible en une seule execution
+## Contribution
 
-* sgbd:
-    comme le nom le dis c'est ce module qui gere le systeme de gestion de base de donne pour le compte du volet de sauvegarde 
-    des mot de passe chiffrer et la lecture de ces dernier dans le cadre d'une eventuel ouverture de seession ou tout objet blocquer par inauconf ayant une cles sauvegarder dans la base de donner 
-    par defaut la db_name est Inauconf
+Les contributions à ce projet sont les bienvenues ! Si vous souhaitez apporter des modifications ou ajouter de nouvelles fonctionnalités, n'hésitez pas à ouvrir une demande de pull.
+Pull requests are welcome. For major changes, please open an [issue](https://github.com/ndjieudja/inauconf/issues) first
+to discuss what you would like to change.
 
-* global vavrious, shema.sql sont des fichier contenant le neccessaire au bon fonctionnnement de l'appliaiton dans ses different volets.
+Please make sure to update tests as appropriate.
 
-                                                                                                        
-                                                                                                        
-                                                                                                        
-                                                                                                        Inauconf.inc
-                                                                                                        dev/ Gabrielhack
-                                                                                                        /media/anonymous/NG 40/Backup/logo.png
-                                                                                                        tel: +237 672 87 30 02
-                                                                                                        github: github/Ndjieudja
-                                                                                                        web: gabrielhack.pythonanywhere.com/start
+## Auteurs
 
+- Gabriel Ndjieu dja <gabrielndjieudja@gmail.com>
 
+## License
+
+Ce projet est sous licence MIT. Veuillez consulter le fichier LICENSE pour plus de détails.
