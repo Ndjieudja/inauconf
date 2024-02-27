@@ -9,7 +9,7 @@ Ce projet est une application Python qui effectue diverses opérations. Il est �
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
-pip install inauconf
+pip install inauconf == 1.2.3
 ```
 
 ## Fonctionnalités
