@@ -160,9 +160,13 @@ class EncryptAll:
 
             # Remove the original file
             os.remove(file_name)
+            
+            return True
 
         except Exception as error:
             print(error)
+            # print("An error occured when trying to crypt file")
+            return False
 
     def uncrypt_file(self, file_name):
         """
