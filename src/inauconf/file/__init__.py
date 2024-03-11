@@ -1,4 +1,4 @@
-# --*-- coding: utf-8 --*--
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Simple Solution, Open Source Security package
@@ -7,14 +7,10 @@
 #
 ##############################################################################
 
-# Import Principal class form crypt and decrypt
-from .crypt import EncryptAll
-
-# Import class contain hash fonctionnality
-from .hash import GetHashValue
 
 # import file that contain class to crypt and decrypt with appropriate parameter
-from .file import *
+from .uncrypted_file import UnCryptFile
+from .criypted_file import CryptFile
 
 # Import path file that contain class to crypt and decrypt all file in tht path 
 # from .path.

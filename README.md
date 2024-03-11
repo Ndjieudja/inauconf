@@ -42,7 +42,7 @@ Voici comment utiliser l'application :
     EncryptAll.crypt_file('inauconf.txt')
 6. Suivez les instructions à l'écran pour utiliser les différentes fonctionnalités de l'application.
 
-**Note importante** : Lorsque vous utilisez la fonctionnalité de chiffrement ou de déchiffrement de fichiers, assurez-vous que le fichier source et le fichier chiffré/déchiffré portent le même nom, à l'exception de l'extension de fichier. Par exemple, si vous avez un fichier `mon_fichier.txt` que vous souhaitez chiffrer, le fichier chiffré sera `mon_fichier.inc`. Veillez à ne pas séparer les deux fichiers pour garantir le bon fonctionnement de l'application.
+**Note importante** : Lorsque vous utilisez la fonctionnalité de chiffrement ou de déchiffrement de fichiers, assurez-vous que le fichier source et le fichier chiffré/déchiffré portent le même nom, à l'exception de l'extension de fichier. Par exemple, si vous avez un fichier `mon_fichier.checksum` que vous souhaitez chiffrer, le fichier chiffré sera `mon_fichier.inc`. Veillez à ne pas séparer les deux fichiers pour garantir le bon fonctionnement de l'application.
 
 ## Contribution
 

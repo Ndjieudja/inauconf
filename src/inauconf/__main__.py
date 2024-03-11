@@ -7,7 +7,7 @@
 #
 ##############################################################################
 
-from inauconf.crypt import EncryptAll
+from inauconf import *
 import argparse
 import os, subprocess
 from getpass import getpass
@@ -25,12 +25,13 @@ args = parser.parse_args()
         
 
 encrypt_all = EncryptAll()
+get_hash = GetHashValue()
 
 if args.string:
     if args.encrypt:
         if args.password:
             passphrase = getpass()
-            encrypt_all.hidden_hash_value(args.string, passphrase)
+            get_hash.hidden_hash_value(args.string, passphrase)
             print('crypt with password')
                     
         else:
@@ -49,20 +50,18 @@ elif args.file:
     if args.encrypt:
         if args.password:
             passphrase = getpass('password: ')
-            encrypt_all.hidden_hash_value(args.file, passphrase)
-            print('crypt with password')
+            get_hash.hidden_hash_value(args.file, passphrase)
                     
         else:
             encrypt_all.crypt_file(args.file)
             print("File encrypted successfully.")
             
-    elif args.decrypt:
-        
+    elif args.decrypt:   
         if args.password:
             passphrase = getpass('password: ')
-            verify = encrypt_all.obtain_hidden_value(args.file, passphrase)
+            verify = get_hash.obtain_hidden_value(args.file, passphrase)
             if verify:
-                print('crypt with password')
+                pass
             else:
                 print('Incorrect password')
                     
