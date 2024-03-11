@@ -10,7 +10,7 @@
 
 from random import randrange
 import os, stat
-import hashlib
+import hashlib, re
 import warnings
 
 
@@ -30,10 +30,8 @@ class EncryptAll:
 		"""
         if type(input) == str:
             key_val = list()
-            key = list()
             values = list()
 
-            container = list()
             for value in range(len(input)):
                 if ord(input[value]) < 10:
                     key_val.append((ord(input[value]), chr(randrange(1, 10))))
@@ -114,7 +112,7 @@ class EncryptAll:
         else:
             print("La valeur a entre dois etre de type String")
 
-    def get_file_hash(self, content):
+    def _get_file_hash(self, content):
         """Calculates the SHA-256 hash of a file"""
         encoded_string = content.encode('utf-8')
 
@@ -148,7 +146,7 @@ class EncryptAll:
                 encrypted_file.write(encrypted_content)
 
             # Calculate hash of the original file
-            hash_value = self.get_file_hash(read)
+            hash_value = self._get_file_hash(read)
 
             # Append hash to the encrypted file
             with open(hash_file_name, 'w') as hash_file:
@@ -167,6 +165,63 @@ class EncryptAll:
             print(error)
             # print("An error occured when trying to crypt file")
             return False
+        
+    def crypt_file_with_pass(self, file_name, passphrase):
+        """
+        	Encrypt file contents with password
+        """
+        try:
+            # Check if the file is already encrypted
+            if file_name.endswith(".inc"):
+                print("File is already encrypted.")
+                return False
+
+            with open(file_name, 'r') as file:
+                read = file.read()
+
+            _name, _ext = os.path.splitext(file_name)
+            new_name = "{0}.inc".format(_name)
+            hash_file_name = "{0}.txt".format(_name)
+
+            # Encrypt the file contents
+            encrypted_content = self.encrypt(read)
+
+            # hiden with password
+            extension = f"[{_ext}]"
+            list_coding_input = list(encrypted_content)
+            list_coding_input.insert(0, extension)
+            
+            print(passphrase)
+            for i in range(len(passphrase)):
+                position = ord(passphrase[i]) + i
+                list_coding_input.insert(position, passphrase[i])
+                
+            encrypted_content_with_pass = "".join(list_coding_input)
+
+            # Write encrypted content to the new file
+            with open(new_name, 'w') as encrypted_file:
+                encrypted_file.write(encrypted_content_with_pass)
+
+            # Calculate hash of the original file
+            hash_value = self._get_file_hash(read)
+
+            # Append hash to the encrypted file
+            with open(hash_file_name, 'w') as hash_file:
+                hash_file.write(f"{hash_value}")
+
+            # Set file permissions
+            os.chmod(new_name, stat.S_ENFMT)
+            os.chmod(hash_file_name, stat.S_ENFMT)
+
+            # Remove the original file
+            os.remove(file_name)
+            
+            return True
+
+        except Exception as error:
+            print(error)
+            # print("An error occured when trying to crypt file")
+            return False 
 
     def uncrypt_file(self, file_name):
         """
@@ -216,7 +271,99 @@ class EncryptAll:
 
         except Exception as error:
             print(error)
+            
+    def uncrypt_file_with_pass(self, file_name, hash_passphrase):
+        """
+			Decrypt file contents and restore the original file
+		"""
+        try:
+            _name, _ext = os.path.splitext(file_name)
 
+            # Remove roots acces to the files
+            _file_name_inc = "{0}.inc".format(_name)
+            _file_name_txt = "{0}.txt".format(_name)
+            # Set file permissions
+            os.chmod(_file_name_inc, stat.S_IRWXU)
+            os.chmod(_file_name_txt, stat.S_IRWXU)
+
+
+            # Check if the file is already decrypted
+            if not file_name.endswith(".inc"):
+                print("File is not encrypted.")
+                return
+
+            with open(file_name, 'r') as file:
+                read_crypted_file = file.read()            
+                
+            # Capturing of hash-passphrase
+            compil = r'\[\.([^]]+)\]'
+
+            # readonly_file_in_list = list(read_crypted_file)
+            
+            get_has_password = list()
+            
+            for i in range(len(hash_passphrase)):
+                real_position = ord(hash_passphrase[i]) + i
+                get_has_password.append(read_crypted_file[real_position])
+        
+            print(get_has_password, hash_passphrase)
+            if hash_passphrase == get_has_password:
+                
+                extension = re.findall(compil, read_crypted_file)
+                read_crypted_file = re.sub(compil, read_crypted_file)
+
+                # Remove obfuscation value( extension, and hash password)
+                read_crypted_file_in_list = list(read_crypted_file)
+                for x_position in hash_passphrase:
+                    index = chr(x_position)
+                    del read_crypted_file_in_list[index]
+                
+                # Decrypt the file contents
+                decrypted_content = self.decrypt("".join(read_crypted_file_in_list))
+
+                # Get hash value for comparaison before unluck it
+                hash_file = "{0}.txt".format(_name)
+                with open(hash_file, 'r') as file:
+                    hash_value_for_verification = file.read()
+                
+                # Verify hash of the decrypted content
+                decrypted_hash = hashlib.sha256(decrypted_content.encode()).hexdigest()
+                if decrypted_hash != hash_value_for_verification:
+                    print("Hash verification failed. File may have been tampered with.")
+                    return
+
+                # Write decrypted content to the original file
+                original_file_name = f"{_name}.{extension}"
+                with open(original_file_name, 'w') as original_file:
+                    original_file.write(decrypted_content)
+
+                # Remove the encrypted file
+                os.remove(file_name)
+                os.remove(hash_file)
+                
+                return True
+                
+            else:
+                return False
+
+        except Exception as error:
+            print(error)
+    
+    def hidden_hash_value(self, input_: str, password: str):
+        """
+            function to crypt file with hidden password
+        """
+        hash_value = self._get_file_hash(password)
+        return self.crypt_file_with_pass(input_, hash_value)
+    
+    def obtain_hidden_value(self, input_: str, password: str):
+        """
+            function to decrypt file with hidden password
+        """
+        hash_value_return  = self._get_file_hash(password)
+        return self.uncrypt_file_with_pass(input_, hash_value_return)
+        
+        
 
 if __name__ == "__main__":
     warnings.warn("use 'python -m inauconf', not 'python -m inauconf.crypt'", DeprecationWarning)

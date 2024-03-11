@@ -18,7 +18,7 @@ parser.add_argument("-d", "--decrypt", action="store_true", help="Decrypt the fi
 parser.add_argument("-e", "--encrypt", action="store_true", help="Encrypt the file")
 parser.add_argument("--string", type=str, help="Decrypt a string using the encrypt function")
 parser.add_argument("-p", "--path", type=str, help="Crypt or Decrypt all file insid this pwd")
-parser.add_argument("-P", "--password", type=str, help="Crypt or Decrypt using password")
+parser.add_argument("-P", "--password", action="store_true", help="Crypt or Decrypt using password")
 
 
 args = parser.parse_args()
@@ -28,21 +28,48 @@ encrypt_all = EncryptAll()
 
 if args.string:
     if args.encrypt:
-        encrypted_string = encrypt_all.encrypt(args.string)
-        print("Encrypted string:", encrypted_string)
+        if args.password:
+            passphrase = getpass()
+            encrypt_all.hidden_hash_value(args.string, passphrase)
+            print('crypt with password')
+                    
+        else:
+            encrypted_string = encrypt_all.encrypt(args.string)
+            print("Encrypted string:", encrypted_string)
+        
     elif args.decrypt:
         decrypted_string = encrypt_all.decrypt(args.string)
         print("Decrypted string:", decrypted_string)
+        
     else:
         print("Please specify whether to encrypt or decrypt the string using the -e or -d option.")
+        
 
 elif args.file:
     if args.encrypt:
-        encrypt_all.crypt_file(args.file)
-        print("File encrypted successfully.")
+        if args.password:
+            passphrase = getpass('password: ')
+            encrypt_all.hidden_hash_value(args.file, passphrase)
+            print('crypt with password')
+                    
+        else:
+            encrypt_all.crypt_file(args.file)
+            print("File encrypted successfully.")
+            
     elif args.decrypt:
-        encrypt_all.uncrypt_file(args.file)
-        print("File decrypted and restored successfully.")
+        
+        if args.password:
+            passphrase = getpass('password: ')
+            verify = encrypt_all.obtain_hidden_value(args.file, passphrase)
+            if verify:
+                print('crypt with password')
+            else:
+                print('Incorrect password')
+                    
+        else:
+            encrypt_all.uncrypt_file(args.file)
+            print("File decrypted and restored successfully.")
+        
     else:
         print("Please specify whether to encrypt or decrypt the file using the -e or -d option.")
         
@@ -90,36 +117,6 @@ elif args.path:
 
         except Exception as error:
             print('Commande execution falled')
-            
-elif args.passwd:
-    passphrase = getpass('passwd: ')
-    if args.string:
-        if args.encrypt:
-            # script script with password
-            print('crypt with password')
-            
-        elif args.decrypt:
-            # script to decrypt if password is coreect
-            print('decrypt with password')
-            
-    if args.path:
-        if args.encrypt:
-            # script script with password
-            print('crypt with password')
-            
-        elif args.decrypt:
-            # script to decrypt if password is coreect
-            print('decrypt with password')
-         
-        
-    elif args.file:
-        if args.encrypt:
-            # script script with password
-            print('crypt with password')
-            
-        elif args.decrypt:
-            # script to decrypt if password is coreect
-            print('decrypt with password')
-        
+                    
 else:
     parser.print_help()
